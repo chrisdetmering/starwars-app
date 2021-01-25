@@ -2,14 +2,36 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 
-class App extends React.Component {
-	componentDidMount() {
-		const baseURL = 'https://swapi.dev/api/';
+import Header from './Components/Header';
+import SearchBar from './Components/SearchBar';
+import TableDisplay from './Components/TableDisplay';
+import Pagination from './Components/Pagination';
 
+class App extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			loading: false,
+			data: {},
+			people: [],
+			currentPage: 1
+		};
+	}
+	componentDidMount() {
+		//get people data
+		const baseURL = 'https://swapi.py4e.com/api/people/';
+		const page = '?page=' + this.state.currentPage;
+		this.setState({ loading: true });
 		axios
-			.get(baseURL + 'planets/1/')
+			.get(baseURL + page)
 			.then((response) => {
-				console.log(response.data);
+				const data = response.data;
+				console.log(data);
+				this.setState({
+					data: data,
+					loading: false,
+					people: [ ...response.data.results ]
+				});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -17,9 +39,14 @@ class App extends React.Component {
 	}
 
 	render() {
+		// const text = this.state.loading ? 'loading...' : this.state.data;
+		console.log(this.state.people);
 		return (
-			<div className="container d-flex justify-content-center">
-				<h1>Star Wars App</h1>
+			<div className="container d-flex flex-column justify-content-center align-items-center">
+				<Header />
+				<SearchBar />
+				<TableDisplay people={this.state.people} />
+				<Pagination />
 			</div>
 		);
 	}

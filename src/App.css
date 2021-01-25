@@ -1,5 +1,22 @@
 html,
 body {
 	/* background-image: url(./Midnight\ City.jpg); */
-	background-image: url(./Deep\ Space.jpg);
+	/* background-image: url(./Deep\ Space.jpg); */
+}
+
+h1 {
+	margin: 50px 10px;
+	font-size: 3rem;
+}
+
+table {
+	margin: 50px 0px;
+}
+
+nav {
+	margin-left: auto;
+}
+
+input {
+	width: 300px;
 }
