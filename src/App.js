@@ -14,7 +14,8 @@ class App extends React.Component {
 			loading: false,
 			data: {},
 			people: [],
-			currentPage: 1
+			currentPage: 1,
+			resultsCount: 0
 		};
 		this.changePage = this.changePage.bind(this);
 	}
@@ -28,11 +29,12 @@ class App extends React.Component {
 			.get(baseURL + page)
 			.then((response) => {
 				const data = response.data;
-				// console.log(data);
+				console.log(data);
 				this.setState({
 					data: data,
 					loading: false,
-					people: [ ...response.data.results ]
+					people: [ ...data.results ],
+					resultsCount: data.count
 				});
 			})
 			.catch((error) => {
@@ -41,6 +43,8 @@ class App extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+		console.log('Did Update');
+
 		if (prevState.currentPage !== this.state.currentPage) {
 			const baseURL = 'https://swapi.py4e.com/api/people/';
 			const page = '?page=' + this.state.currentPage;
@@ -62,7 +66,7 @@ class App extends React.Component {
 	}
 
 	changePage(page) {
-		if (page === 'next') {
+		if (page === 'next' && this.state.currentPage !== Math.ceil(this.state.resultsCount / 10)) {
 			this.setState((prevState) => ({
 				currentPage: prevState.currentPage + 1
 			}));
@@ -87,7 +91,7 @@ class App extends React.Component {
 				<Header />
 				<SearchBar />
 				<TableDisplay people={this.state.people} />
-				<Pagination nextPage={this.changePage} />
+				<Pagination changePage={this.changePage} resultsCount={this.state.resultsCount} />
 			</div>
 		);
 	}
