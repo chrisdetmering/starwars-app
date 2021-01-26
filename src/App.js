@@ -66,12 +66,12 @@ class App extends React.Component {
 	}
 
 	changePage(page) {
-		if (page === 'next' && this.state.currentPage !== Math.ceil(this.state.resultsCount / 10)) {
+		if (page === 'next') {
 			this.setState((prevState) => ({
 				currentPage: prevState.currentPage + 1
 			}));
 		}
-		if (page === 'previous' && this.state.currentPage !== 1) {
+		if (page === 'previous') {
 			this.setState((prevState) => ({
 				currentPage: prevState.currentPage - 1
 			}));
@@ -91,7 +91,11 @@ class App extends React.Component {
 				<Header />
 				<SearchBar />
 				<TableDisplay people={this.state.people} />
-				<Pagination changePage={this.changePage} resultsCount={this.state.resultsCount} />
+				<Pagination
+					changePage={this.changePage}
+					resultsCount={this.state.resultsCount}
+					currentPage={this.state.currentPage}
+				/>
 			</div>
 		);
 	}
