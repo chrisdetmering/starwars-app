@@ -1,33 +1,33 @@
 import React from 'react';
 
-function Pagination() {
+function Pagination(props) {
 	return (
 		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item">
-					<a class="page-link" href="#">
+			<ul className="pagination">
+				<li className="page-item">
+					<button className="page-link" onClick={() => props.nextPage('previous')}>
 						Previous
-					</a>
+					</button>
 				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">
+				<li className="page-item">
+					<button className="page-link" onClick={() => props.nextPage(1)}>
 						1
-					</a>
+					</button>
 				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">
+				<li className="page-item">
+					<button className="page-link" onClick={() => props.nextPage(2)}>
 						2
-					</a>
+					</button>
 				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">
+				<li className="page-item">
+					<button className="page-link" onClick={() => props.nextPage(3)}>
 						3
-					</a>
+					</button>
 				</li>
-				<li class="page-item">
-					<a class="page-link" href="#">
+				<li className="page-item">
+					<button className="page-link" onClick={() => props.nextPage('next')}>
 						Next
-					</a>
+					</button>
 				</li>
 			</ul>
 		</nav>

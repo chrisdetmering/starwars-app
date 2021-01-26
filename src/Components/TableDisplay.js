@@ -6,7 +6,7 @@ function TableDisplay({ people }) {
 	const tableItems = people.map((person) => {
 		return <TableItem key={person.name} person={person} />;
 	});
-	console.log(people);
+	// console.log(people);
 	return (
 		<Table striped bordered hover>
 			<thead>
