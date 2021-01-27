@@ -8,7 +8,7 @@ function TableDisplay({ people }) {
 	});
 	// console.log(people);
 	return (
-		<Table striped bordered hover>
+		<Table borderless striped hover variant="dark">
 			<thead>
 				<tr>
 					<th>Name</th>

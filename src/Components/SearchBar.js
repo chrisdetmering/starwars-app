@@ -1,18 +1,55 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import Button from 'react-bootstrap/Button';
 
 class SearchBar extends React.Component {
+	constructor() {
+		super();
+		this.state = { term: '' };
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(event) {
+		this.setState({ term: event.target.value });
+	}
+
+	onFormSubmit(event) {
+		event.preventDefault();
+	}
+
 	render() {
 		return (
-			<Form inline>
-				<Form.Label htmlFor="inlineFormInputName" srOnly>
-					Name
-				</Form.Label>
-				<Form.Control className="mb-2 mr-sm-2" id="inlineFormInputName" placeholder="Ex: Luke Skywalker" />
-				<Button type="submit" className="mb-2">
-					Submit
-				</Button>
+			<Form onSubmit={this.onFormSubmit}>
+				<Form.Row>
+					<Col id="search-label">
+						<Form.Label>Search:</Form.Label>
+					</Col>
+					<Col sm={8}>
+						<Form.Control
+							className=""
+							id="inlineFormInputName"
+							value={this.state.term}
+							onChange={this.handleChange}
+							autoComplete="off"
+							placeholder="Ex: Skywalker"
+						/>
+					</Col>
+					<Col>
+						<Button
+							variant="secondary"
+							type="submit"
+							className=""
+							onClick={() => {
+								this.props.onSubmit(this.state.term);
+							}}
+						>
+							Submit
+						</Button>
+					</Col>
+				</Form.Row>
 			</Form>
 		);
 	}

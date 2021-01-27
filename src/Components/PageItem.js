@@ -5,7 +5,7 @@ function PageItem(props) {
 	const classText = isCurrentPage ? 'page-item active' : 'page-item';
 	return (
 		<li className={classText}>
-			<button className="page-link" onClick={() => props.changePage(props.pageNumber)}>
+			<button className="page-link " onClick={() => props.changePage(props.pageNumber)}>
 				{props.pageNumber}
 			</button>
 		</li>
