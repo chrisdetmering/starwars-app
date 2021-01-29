@@ -15,11 +15,18 @@ h1 {
 	margin: 50px 10px;
 	font-size: 3rem;
 }
-table {
-	margin: 50px 0px;
+.table {
+	margin: 0;
+}
+.results {
+	display: flex;
+	flex-direction: column;
+	padding: 50px 50px;
+	width: 100%;
 }
 nav {
-	margin-left: auto;
+	align-self: flex-end;
+	padding-top: 10px;
 }
 #search-label {
 	display: flex;

@@ -26,7 +26,6 @@ class App extends React.Component {
 		//get people data
 		const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
 			.currentPage}`;
-
 		console.log('Mounted');
 		axios
 			.get(baseURL)
@@ -101,12 +100,14 @@ class App extends React.Component {
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
 				<Header />
 				<SearchBar onSubmit={this.onSearchSubmit} />
-				<TableDisplay people={this.state.characterData} />
-				<Pagination
-					changePage={this.changePage}
-					resultsCount={this.state.resultsCount}
-					currentPage={this.state.currentPage}
-				/>
+				<div className="results">
+					<TableDisplay people={this.state.characterData} />
+					<Pagination
+						changePage={this.changePage}
+						resultsCount={this.state.resultsCount}
+						currentPage={this.state.currentPage}
+					/>
+				</div>
 			</div>
 		);
 	}
