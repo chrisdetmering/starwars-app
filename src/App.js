@@ -11,31 +11,34 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			loading: false,
-			data: {},
-			people: [],
+			results: {},
+			characterData: [],
 			currentPage: 1,
-			resultsCount: 0
+			resultsCount: 0,
+			nextPage: '',
+			prevPage: '',
+			searchTerm: ''
 		};
 		this.changePage = this.changePage.bind(this);
 		this.onSearchSubmit = this.onSearchSubmit.bind(this);
 	}
 	componentDidMount() {
 		//get people data
+		const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
+			.currentPage}`;
+
 		console.log('Mounted');
-		this.setState({ loading: true });
-		const baseURL = 'https://swapi.py4e.com/api/people/';
-		const page = '?page=' + this.state.currentPage;
 		axios
-			.get(baseURL + page)
+			.get(baseURL)
 			.then((response) => {
-				const data = response.data;
-				console.log(data);
+				const results = response.data;
+				console.log(results);
 				this.setState({
-					data: data,
-					loading: false,
-					people: [ ...data.results ],
-					resultsCount: data.count
+					results,
+					characterData: [ ...results.results ],
+					resultsCount: results.count,
+					nextPage: results.next,
+					prevPage: results.previous
 				});
 			})
 			.catch((error) => {
@@ -46,18 +49,20 @@ class App extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Did Update');
 
-		if (prevState.currentPage !== this.state.currentPage) {
-			const baseURL = 'https://swapi.py4e.com/api/people/';
-			const page = '?page=' + this.state.currentPage;
+		if (prevState.currentPage !== this.state.currentPage || prevState.searchTerm !== this.state.searchTerm) {
+			const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
+				.currentPage}`;
 			axios
-				.get(baseURL + page)
+				.get(baseURL)
 				.then((response) => {
-					const data = response.data;
-					// console.log(data);
+					const results = response.data;
+					// console.log(results);
 					this.setState({
-						data: data,
-						loading: false,
-						people: [ ...response.data.results ]
+						results,
+						characterData: [ ...results.results ],
+						resultsCount: results.count,
+						nextPage: results.next,
+						prevPage: results.previous
 					});
 				})
 				.catch((error) => {
@@ -67,21 +72,9 @@ class App extends React.Component {
 	}
 
 	onSearchSubmit(term) {
-		const baseURL = 'https://swapi.py4e.com/api/people/';
-		const search = '?search=' + term;
-		axios
-			.get(baseURL + search)
-			.then((response) => {
-				console.log(response.data);
-				const data = response.data;
-				this.setState({
-					people: [ ...data.results ],
-					resultsCount: data.count
-				});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		this.setState({
+			searchTerm: term
+		});
 	}
 
 	changePage(page) {
@@ -103,13 +96,12 @@ class App extends React.Component {
 	}
 
 	render() {
-		// const text = this.state.loading ? 'loading...' : this.state.data;
 		console.log(this.state.people);
 		return (
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
 				<Header />
 				<SearchBar onSubmit={this.onSearchSubmit} />
-				<TableDisplay people={this.state.people} />
+				<TableDisplay people={this.state.characterData} />
 				<Pagination
 					changePage={this.changePage}
 					resultsCount={this.state.resultsCount}
