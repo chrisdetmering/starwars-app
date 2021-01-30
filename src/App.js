@@ -20,7 +20,7 @@ class App extends React.Component {
 			searchTerm: ''
 		};
 		this.changePage = this.changePage.bind(this);
-		this.onSearchSubmit = this.onSearchSubmit.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 	componentDidMount() {
 		//get people data
@@ -49,6 +49,7 @@ class App extends React.Component {
 		console.log('Did Update');
 
 		if (prevState.currentPage !== this.state.currentPage || prevState.searchTerm !== this.state.searchTerm) {
+			console.log('New Data');
 			const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
 				.currentPage}`;
 			axios
@@ -70,10 +71,13 @@ class App extends React.Component {
 		}
 	}
 
-	onSearchSubmit(term) {
+	onFormSubmit(event) {
+		event.preventDefault();
+		const searchTerm = event.target.searchTerm.value;
 		this.setState({
-			searchTerm: term
+			searchTerm
 		});
+		console.log(event.target.searchTerm.value);
 	}
 
 	changePage(page) {
@@ -95,11 +99,10 @@ class App extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.people);
 		return (
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
 				<Header />
-				<SearchBar onSubmit={this.onSearchSubmit} />
+				<SearchBar onFormSubmit={this.onFormSubmit} />
 				<div className="results">
 					<TableDisplay people={this.state.characterData} />
 					<Pagination
