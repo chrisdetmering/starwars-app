@@ -4,7 +4,7 @@
 
 Try it [here](https://bcherrera14.github.io/snake-game/)
 
-<!-- <img src="./SnakeGame.PNG" alt="alt text" width="400px"> -->
+<img src="./starwars_v2.gif" alt="alt text" width="700px">
 
 ## Summary
 
