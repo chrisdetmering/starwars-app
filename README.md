@@ -1,4 +1,4 @@
-# Star Wars API APP
+# Star Wars API App
 
 *RESTful API app using the Star Wars API.*
 
