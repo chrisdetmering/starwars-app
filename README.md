@@ -2,9 +2,9 @@
 
 *RESTful API app using the Star Wars API.*
 
-Try it [here](https://bcherrera14.github.io/snake-game/)
+Try it [here](https://starwars-app-herrera.herokuapp.com/)
 
-<img src="./starwars_v2.gif" alt="alt text" width="700px">
+<img src="./starwars_v4.gif" alt="alt text" width="700px">
 
 ## Summary
 

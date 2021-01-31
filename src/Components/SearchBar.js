@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
 			<Form onSubmit={this.props.onFormSubmit}>
 				<Form.Row>
 					<Col id="search-label">
-						<Form.Label>Search:</Form.Label>
+						<Form.Label>Name:</Form.Label>
 					</Col>
 					<Col sm={8}>
 						<Form.Control
@@ -22,8 +22,8 @@ class SearchBar extends React.Component {
 						/>
 					</Col>
 					<Col>
-						<Button variant="light" type="submit">
-							Submit
+						<Button variant="secondary" type="submit">
+							Search
 						</Button>
 					</Col>
 				</Form.Row>

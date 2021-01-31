@@ -2,14 +2,16 @@ html,
 body {
 	/* background-image: url(./Midnight\ City.jpg); */
 	background-image: url(./Deep\ Space.jpg);
-	color: whitesmoke;
+	color: #434343;
 }
 
 .card {
 	margin-top: 3rem;
+	margin-bottom: 3rem;
 	border-radius: 1rem;
-	background-color: #343a40;
+	background-color: whitesmoke;
 	min-height: 900px;
+	width: 70%;
 }
 h1 {
 	margin: 50px 10px;
