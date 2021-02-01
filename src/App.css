@@ -32,7 +32,6 @@ nav {
 }
 #search-label {
 	display: flex;
-	padding-top: 2px;
 	align-items: center;
 }
 .form-label {
@@ -40,7 +39,9 @@ nav {
 	font-size: 1.3rem;
 }
 form {
-	width: 60%;
+	width: auto;
+	margin: 0;
+	margin-right: 0;
 }
 table {
 	margin: 50px 50px;

@@ -3,7 +3,6 @@ import axios from 'axios';
 import './App.css';
 
 import Header from './Components/Header';
-import SearchBar from './Components/SearchBar';
 import TableDisplay from './Components/TableDisplay';
 import Pagination from './Components/Pagination';
 
@@ -101,8 +100,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
-				<Header />
-				<SearchBar onFormSubmit={this.onFormSubmit} />
+				<Header onFormSubmit={this.onFormSubmit} />
+				{/* <SearchBar onFormSubmit={this.onFormSubmit} /> */}
 				<div className="results">
 					<TableDisplay people={this.state.characterData} />
 					<Pagination
