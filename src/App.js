@@ -103,7 +103,7 @@ class App extends React.Component {
 				<Header onFormSubmit={this.onFormSubmit} />
 				{/* <SearchBar onFormSubmit={this.onFormSubmit} /> */}
 				<div className="results">
-					<TableDisplay people={this.state.characterData} />
+					<TableDisplay characterData={this.state.characterData} />
 					<Pagination
 						changePage={this.changePage}
 						resultsCount={this.state.resultsCount}

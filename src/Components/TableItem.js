@@ -11,7 +11,7 @@ class TableItem extends React.Component {
 	}
 	componentDidMount() {
 		axios
-			.get(this.props.person.homeworld)
+			.get(this.props.character.homeworld)
 			.then((response) => {
 				const planet = response.data;
 				this.setState({
@@ -23,7 +23,7 @@ class TableItem extends React.Component {
 			});
 
 		axios
-			.get(this.props.person.species)
+			.get(this.props.character.species)
 			.then((response) => {
 				const species = response.data;
 				this.setState({
@@ -37,10 +37,10 @@ class TableItem extends React.Component {
 	render() {
 		return (
 			<tr>
-				<td>{this.props.person.name}</td>
-				<td>{this.props.person.birth_year}</td>
-				<td>{this.props.person.height}</td>
-				<td>{this.props.person.mass}</td>
+				<td>{this.props.character.name}</td>
+				<td>{this.props.character.birth_year}</td>
+				<td>{this.props.character.height}</td>
+				<td>{this.props.character.mass}</td>
 				<td>{this.state.homeworld}</td>
 				<td>{this.state.species}</td>
 			</tr>

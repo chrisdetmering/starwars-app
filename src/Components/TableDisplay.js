@@ -2,9 +2,9 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import TableItem from './TableItem';
 
-function TableDisplay({ people }) {
-	const tableItems = people.map((person) => {
-		return <TableItem key={person.name} person={person} />;
+function TableDisplay({ characterData }) {
+	const tableItems = characterData.map((character) => {
+		return <TableItem key={character.name} character={character} />;
 	});
 	// console.log(people);
 	return (
