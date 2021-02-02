@@ -20,13 +20,13 @@ class App extends React.Component {
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
-	componentDidMount() {
-		const baseURL = 'https://swapi.py4e.com/api/people/';
+	getCharacterData() {
+		const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
+			.currentPage}`;
 		axios
 			.get(baseURL)
 			.then((response) => {
 				const results = response.data;
-				console.log(results);
 				this.setState({
 					results,
 					characterData: [ ...results.results ],
@@ -38,23 +38,31 @@ class App extends React.Component {
 			});
 	}
 
+	getHomeworld(homeworldURL) {
+		axios
+			.get(homeworldURL)
+			.then((response) => {
+				let results = response.data;
+				// this.setState({
+				// 	results,
+				// 	characterData: [ ...results.results ],
+				// 	resultsCount: results.count
+				// });
+				console.log(results.name);
+				return results.name;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	componentDidMount() {
+		this.getCharacterData();
+	}
+
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.currentPage !== this.state.currentPage || prevState.searchTerm !== this.state.searchTerm) {
-			const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
-				.currentPage}`;
-			axios
-				.get(baseURL)
-				.then((response) => {
-					const results = response.data;
-					this.setState({
-						results,
-						characterData: [ ...results.results ],
-						resultsCount: results.count
-					});
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			this.getCharacterData();
 		}
 	}
 
@@ -90,7 +98,7 @@ class App extends React.Component {
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
 				<Header onFormSubmit={this.onFormSubmit} />
 				<div className="results">
-					<TableDisplay characterData={this.state.characterData} />
+					<TableDisplay characterData={this.state.characterData} getHomeworld={this.getHomeworld} />
 					<PageNav
 						changePage={this.changePage}
 						resultsCount={this.state.resultsCount}

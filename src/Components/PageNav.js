@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PageNav(props) {
+const PageNav = (props) => {
 	const totalPages = Math.ceil(props.resultsCount / 10);
 	const pageNavBar = [];
 	for (let i = 1; i <= totalPages; i++) {
@@ -32,6 +32,6 @@ function PageNav(props) {
 			</ul>
 		</nav>
 	);
-}
+};
 
 export default PageNav;

@@ -2,9 +2,9 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import TableItem from './TableItem';
 
-function TableDisplay({ characterData }) {
+const TableDisplay = ({ characterData, getHomeworld }) => {
 	const tableItems = characterData.map((character) => {
-		return <TableItem key={character.name} character={character} />;
+		return <TableItem key={character.name} character={character} getHomeworld={getHomeworld} />;
 	});
 	return (
 		<Table borderless striped hover>
@@ -21,6 +21,6 @@ function TableDisplay({ characterData }) {
 			<tbody>{tableItems}</tbody>
 		</Table>
 	);
-}
+};
 
 export default TableDisplay;

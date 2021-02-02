@@ -1,7 +1,7 @@
-import React from 'react'
-import {Form, Col, Button} from 'react-bootstrap'
+import React from 'react';
+import { Form, Col, Button } from 'react-bootstrap';
 
-function Header({onFormSubmit}) {
+const Header = ({ onFormSubmit }) => {
 	return (
 		<div>
 			<h1>Star Wars Directory</h1>
@@ -17,7 +17,7 @@ function Header({onFormSubmit}) {
 							placeholder="Ex: Skywalker"
 						/>
 					</Col>
-					<Col className="col-auto" >
+					<Col className="col-auto">
 						<Button variant="secondary" type="submit" className="mb-2">
 							Search
 						</Button>
@@ -26,6 +26,6 @@ function Header({onFormSubmit}) {
 			</Form>
 		</div>
 	);
-}
+};
 
 export default Header;
