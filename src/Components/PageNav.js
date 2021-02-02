@@ -1,17 +1,17 @@
 import React from 'react';
 
-function Pagination(props) {
+function PageNav(props) {
 	const totalPages = Math.ceil(props.resultsCount / 10);
 	const pageNavBar = [];
 	for (let i = 1; i <= totalPages; i++) {
-		const classText = props.currentPage === i  ? 'page-item active' : 'page-item';
+		const classText = props.currentPage === i ? 'page-item active' : 'page-item';
 		pageNavBar.push(
-			<li className={classText}>
+			<li className={classText} key={i}>
 				<button className="page-link " onClick={() => props.changePage(i)}>
 					{i}
 				</button>
 			</li>
-		)
+		);
 	}
 	const previousClass = props.currentPage === 1 ? 'page-item disabled' : 'page-item';
 	const nextClass = props.currentPage === totalPages ? 'page-item disabled' : 'page-item';
@@ -34,4 +34,4 @@ function Pagination(props) {
 	);
 }
 
-export default Pagination;
+export default PageNav;

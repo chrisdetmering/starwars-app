@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 
 class TableItem extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			homeworld: '',
 			species: ''

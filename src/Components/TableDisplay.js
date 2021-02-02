@@ -6,7 +6,6 @@ function TableDisplay({ characterData }) {
 	const tableItems = characterData.map((character) => {
 		return <TableItem key={character.name} character={character} />;
 	});
-	// console.log(people);
 	return (
 		<Table borderless striped hover>
 			<thead>
