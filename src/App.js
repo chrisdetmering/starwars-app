@@ -38,24 +38,6 @@ class App extends React.Component {
 			});
 	}
 
-	getHomeworld(homeworldURL) {
-		axios
-			.get(homeworldURL)
-			.then((response) => {
-				let results = response.data;
-				// this.setState({
-				// 	results,
-				// 	characterData: [ ...results.results ],
-				// 	resultsCount: results.count
-				// });
-				console.log(results.name);
-				return results.name;
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
-
 	componentDidMount() {
 		this.getCharacterData();
 	}
@@ -98,7 +80,7 @@ class App extends React.Component {
 			<div className="container d-flex flex-column justify-content-start align-items-center card">
 				<Header onFormSubmit={this.onFormSubmit} />
 				<div className="results">
-					<TableDisplay characterData={this.state.characterData} getHomeworld={this.getHomeworld} />
+					<TableDisplay characterData={this.state.characterData} />
 					<PageNav
 						changePage={this.changePage}
 						resultsCount={this.state.resultsCount}
