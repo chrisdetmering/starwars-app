@@ -1,8 +1,11 @@
 html,
 body {
-	/* background-image: url(./Midnight\ City.jpg); */
+	height: 100%;
+	margin: 0;
 	background-image: url(./Deep\ Space.jpg);
 	color: #434343;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .card {
