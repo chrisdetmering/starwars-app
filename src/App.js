@@ -10,25 +10,20 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			results: {},
 			characterData: [],
 			currentPage: 1,
 			resultsCount: null,
-			searchTerm: ''
 		};
 		this.changePage = this.changePage.bind(this);
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
-	getCharacterData() {
-		const baseURL = `https://swapi.py4e.com/api/people/?search=${this.state.searchTerm}&page=${this.state
-			.currentPage}`;
+	getCharacterData(baseURL) {
 		axios
 			.get(baseURL)
 			.then((response) => {
 				const results = response.data;
 				this.setState({
-					results,
 					characterData: [ ...results.results ],
 					resultsCount: results.count
 				});
@@ -39,40 +34,32 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getCharacterData();
+		this.getCharacterData(
+			`https://swapi.py4e.com/api/people/?page=1`);
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevState.currentPage !== this.state.currentPage || prevState.searchTerm !== this.state.searchTerm) {
-			this.getCharacterData();
-		}
-	}
+
 
 	onFormSubmit(event) {
 		event.preventDefault();
 		const searchTerm = event.target.searchTerm.value;
-		this.setState({
-			searchTerm,
-			currentPage: 1
-		});
+		this.getCharacterData(
+			`https://swapi.py4e.com/api/people/?search=${searchTerm}`
+		)
 	}
 
 	changePage(page) {
-		if (page === 'next') {
-			this.setState((prevState) => ({
-				currentPage: prevState.currentPage + 1
-			}));
+		let currentPage = page; 
+		if (page === "previous") { 
+			currentPage = this.state.currentPage - 1; 
 		}
-		if (page === 'previous') {
-			this.setState((prevState) => ({
-				currentPage: prevState.currentPage - 1
-			}));
+
+		if (page === "next") {
+			currentPage = this.state.currentPage + 1; 
 		}
-		if (typeof page === 'number') {
-			this.setState({
-				currentPage: page
-			});
-		}
+
+		this.getCharacterData(`https://swapi.py4e.com/api/people/?page=${currentPage}`);
+		this.setState(() => ({currentPage})); 
 	}
 
 	render() {

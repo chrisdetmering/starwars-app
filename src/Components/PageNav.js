@@ -2,17 +2,23 @@ import React from 'react';
 
 const PageNav = (props) => {
 	const totalPages = Math.ceil(props.resultsCount / 10);
-	const pageNavBar = [];
-	for (let i = 1; i <= totalPages; i++) {
-		const classText = props.currentPage === i ? 'page-item active' : 'page-item';
-		pageNavBar.push(
-			<li className={classText} key={i}>
-				<button className="page-link " onClick={() => props.changePage(i)}>
-					{i}
-				</button>
-			</li>
-		);
+
+	function pages() { 
+		const pageNavBar = [];
+		for (let i = 1; i <= totalPages; i++) {
+			const classText = props.currentPage === i ? 'page-item active' : 'page-item';
+			pageNavBar.push(
+				<li className={classText} key={i}>
+					<button className="page-link " onClick={() => props.changePage(i)}>
+						{i}
+					</button>
+				</li>
+			);
+		}
+
+		return pageNavBar; 
 	}
+	
 	const previousClass = props.currentPage === 1 ? 'page-item disabled' : 'page-item';
 	const nextClass = props.currentPage === totalPages ? 'page-item disabled' : 'page-item';
 	return (
@@ -23,7 +29,7 @@ const PageNav = (props) => {
 						Previous
 					</button>
 				</li>
-				{pageNavBar}
+				{pages()}
 				<li className={nextClass}>
 					<button className="page-link" onClick={() => props.changePage('next')}>
 						Next
