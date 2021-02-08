@@ -10,7 +10,6 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			results: {},
 			characterData: [],
 			currentPage: 1,
 			resultsCount: null,
@@ -57,22 +56,8 @@ class App extends React.Component {
 		});
 	}
 
-	changePage(page) {
-		if (page === 'next') {
-			this.setState((prevState) => ({
-				currentPage: prevState.currentPage + 1
-			}));
-		}
-		if (page === 'previous') {
-			this.setState((prevState) => ({
-				currentPage: prevState.currentPage - 1
-			}));
-		}
-		if (typeof page === 'number') {
-			this.setState({
-				currentPage: page
-			});
-		}
+	changePage(currentPage) {
+		this.setState({currentPage});
 	}
 
 	render() {
